@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.web.blog.dao.UserDao">
+
+	<!-- email 중복 조회 -->
+	<select id="getUserByEmail" resultType="com.web.blog.dto.User">
+		select uid, email, password
+		from user
+		where email = #{email}
+	</select>
+	
+	<!-- 로그인 -->
+	<select id="findUserByEmailAndPassword" resultType="User">
+		select uid, email, password
+		from user
+		where email = #{email}
+		and password = #{password}
+	</select>
+	
+	<!-- 회원가입 -->
+	<insert id="insertUser">
+		insert into user(uid, email, password)
+		values(#{uid}, #{email}, #{password});
+	</insert>
+	
+	<!-- 회원정보 수정 -->
+	<update id="updateUser">
+		update user
+		set email = #{email},
+			password = #{password}
+		where uid = #{uid}
+	</update>
+	
+	<!-- 회원정보 삭제 -->
+	<delete id="deleteUser">
+		delete from user
+		where uid = #{uid}
+	</delete>
+
+</mapper>
+
